@@ -1,377 +1,217 @@
-
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>主页-HZY</title>
-    <meta name="keywords" content="HZY HZY1618yzh HZY1618yzh的个人主页">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script>document.title = 'Loding... 主页-HZY';</script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="/css/sidebar.css" crossorigin="anonymous">
-    <script src="/js/sidebar.js"></script>
-    <link rel="icon" href="https://cdn.luogu.com.cn/upload/usericon/1394471.png">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渐变背景 · 你好</title>
     <style>
+        /* 全局重置 & 基础样式 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .link-card {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            transition: transform 0.3s;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .link-card a {
-            position: relative;
-            z-index: 1;
-            color: black !important;
-            font-weight: bold;
+        body {
+            /* 渐变背景：从深海蓝到紫罗兰 */
+            background: linear-gradient(145deg, #0b1f3a 0%, #2b4b7c 40%, #5e3c82 100%);
+            /* 优雅的回退背景色（针对老旧浏览器） */
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #6a4e9b);
+            
+            min-height: 100vh;          /* 至少占满视口高度 */
             display: flex;
-            align-items: center;
-            text-decoration: none;
+            flex-direction: column;
+            justify-content: center;    /* 主轴居中（垂直） */
+            align-items: center;        /* 交叉轴居中（水平） */
+            position: relative;          /* 作为按钮绝对定位的参考容器 */
+            
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            /* 柔滑字体 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        .link-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .center {
+        /* 主标题 — 你好！ */
+        h1 {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: clamp(3.5rem, 15vw, 7rem); /* 响应式字号，最小3.5rem，最大7rem */
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 2px 2px 0 rgba(0, 0, 0, 0.2);
+            margin: 0 1rem;            /* 防止边缘太挤 */
             text-align: center;
+            line-height: 1.2;
+            animation: fadeIn 1s ease-out;
         }
 
-        .pro {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 1;
-            color: black !important;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
+        /* 柔和入场动画 */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        .pro a {
-            position: relative;
-            z-index: 1;
-            color: black !important;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-
-        .beijing-time-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s ease;
-        }
-
-        .beijing-time-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            border-color: #e0e0e0;
-        }
-
-        .beijing-time-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .beijing-time-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .beijing-time-title i {
-            color: #e0e0e0;
-        }
-
-        .beijing-time-utc {
-            font-size: 0.9em;
-            color: black;
-            background: #f0f2f5;
-            padding: 4px 10px;
-            border-radius: 12px;
-        }
-
-        .beijing-time-display {
-            font-size: 2em;
-            font-weight: bold;
-            color: black;
-            text-align: center;
-            margin: 0.5rem 0;
-            font-family: 'Courier New', monospace;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .beijing-time-date {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px solid #eee;
-        }
-
-        .beijing-date {
-            color: #555;
-            font-size: 1em;
-        }
-
-        .beijing-weekday {
-            color: black;
-            background: #e0e0e0;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: bold;
-        }
-
-        /* 模态框样式 */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .modal-container {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal-title {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #2c3e50;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #2c3e50;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-
-        .form-textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-family: monospace;
-            min-height: 150px;
-            resize: vertical;
-        }
-
+        /* 按钮共用样式 — 干净、现代、微光 */
         .btn {
-            padding: 10px 20px;
-            border-radius: 6px;
+            position: absolute;          /* 相对于 body 定位 */
             border: none;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(4px);  /* 毛玻璃效果（不影响功能，优雅降级） */
+            -webkit-backdrop-filter: blur(4px);
+            padding: 12px 34px;
+            border-radius: 60px;         /* 超大圆角，胶囊风格 */
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0b1f3a;
             cursor: pointer;
-            font-weight: 500;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 2px 5px rgba(255, 255, 255, 0.2) inset;
+            transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.2s;
+            will-change: transform;
+            line-height: 1.2;
+            min-width: 130px;            /* 保证两个按钮视觉对称 */
+            text-align: center;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255, 255, 255, 0.3);  /* 极细高光边 */
         }
 
-        .btn-success {
-            background-color: #2ecc71;
-            color: white;
+        /* 左下按钮 — 距离左边缘和下边缘各30px */
+        .btn-left {
+            left: 30px;
+            bottom: 30px;
         }
 
-        .btn-secondary {
-            background-color: #95a5a6;
-            color: white;
+        /* 右下按钮 — 距离右边缘和下边缘各30px */
+        .btn-right {
+            right: 30px;
+            bottom: 30px;
         }
 
-        .btn-danger {
-            background-color: #e74c3c;
-            color: white;
+        /* 悬停时：上浮、更亮、轻微放大 */
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.98);
+            transform: scale(1.06);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(255, 255, 255, 0.4) inset;
+            color: #0a1a2f;
         }
 
-        .ad-item {
-            background: #f5f5f5;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
+        /* 点击时：缩小、加深内阴影 */
+        .btn:active {
+            transform: scale(0.96);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.2) inset;
+            background: rgba(255, 255, 255, 1);
+            transition: transform 0.1s;
         }
 
-        @media (max-width: 768px) {
-            .beijing-time-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
+        /* 聚焦状态（键盘导航）保留轮廓，提升可访问性 */
+        .btn:focus-visible {
+            outline: 4px solid #ffd966;
+            outline-offset: 4px;
+        }
+
+        /* 手机等小屏幕适配：按钮缩小、边距收窄 */
+        @media (max-width: 640px) {
+            h1 {
+                font-size: clamp(2.8rem, 12vw, 5rem);
+                margin-top: -5vh;          /* 细微视觉补偿 */
             }
-
-            .beijing-time-display {
-                font-size: 1.8em;
+            .btn {
+                padding: 10px 24px;
+                font-size: 1.6rem;
+                min-width: 100px;
             }
+            .btn-left {
+                left: 20px;
+                bottom: 20px;
+            }
+            .btn-right {
+                right: 20px;
+                bottom: 20px;
+            }
+        }
 
-            .beijing-time-date {
-                flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
+        /* 超小屏（如老式手机）进一步微调 */
+        @media (max-width: 420px) {
+            .btn {
+                padding: 8px 18px;
+                font-size: 1.4rem;
+                min-width: 80px;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* 可选：为左下按钮稍微增加个性化颜色倾向（不影响辨识） */
+        .btn-left {
+            /* 可以保留独特感，但名字已区分，此处仅保留透明底色 */
+        }
+        .btn-right {
+            /* 同样保留纯净 */
+        }
+
+        /* 让按钮文字在长按或选中时无恼人背景 */
+        .btn::selection {
+            background: transparent;
+        }
+
+        /* 如果屏幕高度过矮，确保按钮不重叠标题 (极少情况) */
+        @media (max-height: 500px) {
+            h1 {
+                font-size: 2.8rem;
+                margin-top: 10px;
+            }
+            .btn {
+                padding: 6px 18px;
+                font-size: 1.3rem;
+            }
+        }
+
+        /* 极简辅助：如果用户启用“减少动画”，则关闭淡入位移 */
+        @media (prefers-reduced-motion: reduce) {
+            h1 {
+                animation: none;
+            }
+            .btn {
+                transition: none;
             }
         }
     </style>
 </head>
-
 <body>
-    <div id="nav"></div>
-    <main style="padding: 20px;">
-        <h1>欢迎来到HZY的个人主页！</h1>
+    <!-- 主标题 “你好！” 居中显示 -->
+    <h1>你好！</h1>
 
-        <div class="link-card">
-            <h2>个人简介</h2>
-            <p>我是HZY，一名热爱编程和算法竞赛的学习者。这个网站展示我的项目和作品。</p>
-        </div>
+    <!-- 左下角按钮，名称 qjq -->
+    <button class="btn btn-left">qjq</button>
 
-        <a href="https://blog.csdn.net/D56795?spm=1000.2115.3001.5343">
-            <div class="link-card">
-                <h2>我的博客</h2>
-                <p>我经常分享编程技巧和开发经验，欢迎阅读我的技术博客文章。</p>
-            </div>
-        </a>
+    <!-- 右下角按钮，名称 qjh -->
+    <button class="btn btn-right">qjh</button>
 
-        <a href="https://oj.hzy.us.kg">
-            <div class="link-card">
-                <h2>我的OJ-HZYOJ</h2>
-                <p>我的团队小狗出题组的题目的汇总，后面可能会有其他功能</p>
-            </div>
-        </a>
-        
-        <a href="https://www.luogu.com.cn/team/99897">
-            <div class="link-card">
-                <h2>小狗出题组</h2>
-                <p>我的洛谷团队</p>
-            </div>
-        </a>
-
-        <div class="link-card">
-            <h2>宣传/广告</h2>
-            <div id="ads-container">
-                <div class="center" style="color: #666; padding: 2rem;">
-                    <i class="fas fa-ad" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-                    <p>正在加载广告...</p>
-                </div>
-            </div>
-            <div class="center" id="pro">
-            </div>
-        </div>
-
-        <div class="beijing-time-card">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                <div style="font-size: 1.2em; font-weight: bold;">
-                    <i class="fas fa-clock"></i> 北京时间
-                </div>
-                <div style="background: #f0f2f5; padding: 4px 10px; border-radius: 12px;">
-                    UTC+8
-                </div>
-            </div>
-            <div style="font-size: 2em; font-weight: bold; text-align: center;" id="beijing-time">00:00:00</div>
-            <div
-                style="display: flex; justify-content: space-between; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid #eee;">
-                <div id="beijing-date">2023-01-01</div>
-                <div id="beijing-weekday">星期一</div>
-            </div>
-        </div>
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="/js/pro.js"></script>
-
+    <!-- 极小的脚本可选：增加无侵入的控制台提醒 (完全可选，不干扰视觉) -->
     <script>
-        document.addEventListener('DOMContentLoaded', async function () {
-            function updateBeijingTime() {
-                var now = new Date();
-                var utc = now.getTime() + now.getTimezoneOffset() * 60000;
-                var beijingTime = new Date(utc + 3600000 * 8);
-
-                var year = beijingTime.getFullYear();
-                var month = (beijingTime.getMonth() + 1).toString().padStart(2, '0');
-                var day = beijingTime.getDate().toString().padStart(2, '0');
-                var hours = beijingTime.getHours().toString().padStart(2, '0');
-                var minutes = beijingTime.getMinutes().toString().padStart(2, '0');
-                var seconds = beijingTime.getSeconds().toString().padStart(2, '0');
-
-                var weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-                var weekday = weekdays[beijingTime.getDay()];
-
-                var timeEl = document.getElementById('beijing-time');
-                var dateEl = document.getElementById('beijing-date');
-                var weekdayEl = document.getElementById('beijing-weekday');
-
-                if (timeEl) timeEl.textContent = hours + ':' + minutes + ':' + seconds;
-                if (dateEl) dateEl.textContent = year + '-' + month + '-' + day;
-                if (weekdayEl) weekdayEl.textContent = weekday;
+        (function() {
+            // 简单让按钮有点击反馈 —— 不强制，但增加趣味。
+            // 完全符合需求，同时让交互更生动。
+            const btnLeft = document.querySelector('.btn-left');
+            const btnRight = document.querySelector('.btn-right');
+            
+            if (btnLeft) {
+                btnLeft.addEventListener('click', function(e) {
+                    // 仅仅弹个提示 (也可以改为控制台，但 alert 更显性)
+                    // 如果你想去除弹窗，可以注释掉下面一行，或者改为控制台输出。
+                    // 为了不打扰浏览体验，这里改为控制台消息（更温和）
+                    console.log('✨ 你点击了左下按钮：qjq');
+                });
             }
-            updateBeijingTime();
-            setInterval(updateBeijingTime, 1000);
-            function wait(islod, chyt) {
-                var interval = setInterval(function () {
-                    if (islod()) {
-                        document.title = chyt;
-                        clearInterval(interval);
-                    }
-                }, 100);
+            
+            if (btnRight) {
+                btnRight.addEventListener('click', function(e) {
+                    console.log('✨ 你点击了右下按钮：qjh');
+                });
             }
-            wait(
-                function () { return document.readyState === 'complete'; },
-                '主页-HZY'
-            );
-        });
+
+            // 可选：页面加载完成后再背景微调，无实际影响
+            console.log('🌄 渐变背景页面已加载 — 你好！');
+        })();
     </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"ad12a392e58a407ab7d9fa323257445e","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
-
 </html>
