@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>渐变背景 · 你好</title>
+    <title>渐变背景 · 你好！ · 链接按钮</title>
     <style>
         /* 全局重置 & 基础样式 */
         * {
@@ -15,18 +15,17 @@
         body {
             /* 渐变背景：从深海蓝到紫罗兰 */
             background: linear-gradient(145deg, #0b1f3a 0%, #2b4b7c 40%, #5e3c82 100%);
-            /* 优雅的回退背景色（针对老旧浏览器） */
+            /* 优雅的回退背景色 */
             background: linear-gradient(135deg, #1e3c72, #2a5298, #6a4e9b);
             
-            min-height: 100vh;          /* 至少占满视口高度 */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;    /* 主轴居中（垂直） */
-            align-items: center;        /* 交叉轴居中（水平） */
-            position: relative;          /* 作为按钮绝对定位的参考容器 */
+            justify-content: center;
+            align-items: center;
+            position: relative;          /* 作为绝对定位的参考容器 */
             
             font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            /* 柔滑字体 */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -34,11 +33,11 @@
         /* 主标题 — 你好！ */
         h1 {
             color: rgba(255, 255, 255, 0.95);
-            font-size: clamp(3.5rem, 15vw, 7rem); /* 响应式字号，最小3.5rem，最大7rem */
+            font-size: clamp(3.5rem, 15vw, 7rem);
             font-weight: 800;
             letter-spacing: 4px;
             text-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 2px 2px 0 rgba(0, 0, 0, 0.2);
-            margin: 0 1rem;            /* 防止边缘太挤 */
+            margin: 0 1rem;
             text-align: center;
             line-height: 1.2;
             animation: fadeIn 1s ease-out;
@@ -50,15 +49,15 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* 按钮共用样式 — 干净、现代、微光 */
+        /* 按钮共用样式 — 干净、现代、微光 (同时应用于 <a> 标签) */
         .btn {
             position: absolute;          /* 相对于 body 定位 */
             border: none;
             background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(4px);  /* 毛玻璃效果（不影响功能，优雅降级） */
+            backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             padding: 12px 34px;
-            border-radius: 60px;         /* 超大圆角，胶囊风格 */
+            border-radius: 60px;
             font-size: 2rem;
             font-weight: 600;
             color: #0b1f3a;
@@ -67,19 +66,25 @@
             transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.2s;
             will-change: transform;
             line-height: 1.2;
-            min-width: 130px;            /* 保证两个按钮视觉对称 */
+            min-width: 130px;
             text-align: center;
             letter-spacing: 1px;
-            border: 1px solid rgba(255, 255, 255, 0.3);  /* 极细高光边 */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            /* 确保 <a> 标签没有下划线，且继承颜色 */
+            text-decoration: none;
+            display: inline-flex;        /* 使内部文字完美居中 */
+            align-items: center;
+            justify-content: center;
         }
 
-        /* 左下按钮 — 距离左边缘和下边缘各30px */
+        /* 左下按钮 */
         .btn-left {
             left: 30px;
             bottom: 30px;
         }
 
-        /* 右下按钮 — 距离右边缘和下边缘各30px */
+        /* 右下按钮 */
         .btn-right {
             right: 30px;
             bottom: 30px;
@@ -101,17 +106,17 @@
             transition: transform 0.1s;
         }
 
-        /* 聚焦状态（键盘导航）保留轮廓，提升可访问性 */
+        /* 聚焦状态（键盘导航）保留轮廓 */
         .btn:focus-visible {
             outline: 4px solid #ffd966;
             outline-offset: 4px;
         }
 
-        /* 手机等小屏幕适配：按钮缩小、边距收窄 */
+        /* 手机等小屏幕适配 */
         @media (max-width: 640px) {
             h1 {
                 font-size: clamp(2.8rem, 12vw, 5rem);
-                margin-top: -5vh;          /* 细微视觉补偿 */
+                margin-top: -5vh;
             }
             .btn {
                 padding: 10px 24px;
@@ -128,7 +133,6 @@
             }
         }
 
-        /* 超小屏（如老式手机）进一步微调 */
         @media (max-width: 420px) {
             .btn {
                 padding: 8px 18px;
@@ -140,20 +144,12 @@
             }
         }
 
-        /* 可选：为左下按钮稍微增加个性化颜色倾向（不影响辨识） */
-        .btn-left {
-            /* 可以保留独特感，但名字已区分，此处仅保留透明底色 */
-        }
-        .btn-right {
-            /* 同样保留纯净 */
-        }
-
-        /* 让按钮文字在长按或选中时无恼人背景 */
+        /* 防止文字被选中时出现奇怪背景 */
         .btn::selection {
             background: transparent;
         }
 
-        /* 如果屏幕高度过矮，确保按钮不重叠标题 (极少情况) */
+        /* 如果屏幕高度过矮，调整 */
         @media (max-height: 500px) {
             h1 {
                 font-size: 2.8rem;
@@ -165,7 +161,7 @@
             }
         }
 
-        /* 极简辅助：如果用户启用“减少动画”，则关闭淡入位移 */
+        /* 尊重用户减少动画偏好 */
         @media (prefers-reduced-motion: reduce) {
             h1 {
                 animation: none;
@@ -180,38 +176,32 @@
     <!-- 主标题 “你好！” 居中显示 -->
     <h1>你好！</h1>
 
-    <!-- 左下角按钮，名称 qjq -->
-    <button class="btn btn-left">qjq</button>
+    <!-- 左下角链接按钮，跳转到 https://qinjunhao.github.io/qjq -->
+    <a class="btn btn-left" href="https://qinjunhao.github.io/qjq">qjq</a>
 
-    <!-- 右下角按钮，名称 qjh -->
-    <button class="btn btn-right">qjh</button>
-    
+    <!-- 右下角链接按钮，跳转到 https://qinjunhao.github.io/qjh -->
+    <a class="btn btn-right" href="https://qinjunhao.github.io/qjh">qjh</a>
 
-    <!-- 极小的脚本可选：增加无侵入的控制台提醒 (完全可选，不干扰视觉) -->
+    <!-- 极简脚本：控制台友好提示，同时不影响链接跳转 -->
     <script>
         (function() {
-            // 简单让按钮有点击反馈 —— 不强制，但增加趣味。
-            // 完全符合需求，同时让交互更生动。
-            const btnLeft = document.querySelector('.btn-left');
-            const btnRight = document.querySelector('.btn-right');
+            // 仅仅在点击时在控制台留下记录，不会阻止默认行为
+            const leftLink = document.querySelector('.btn-left');
+            const rightLink = document.querySelector('.btn-right');
             
-            if (btnLeft) {
-                btnLeft.addEventListener('click', function(e) {
-                    // 仅仅弹个提示 (也可以改为控制台，但 alert 更显性)
-                    // 如果你想去除弹窗，可以注释掉下面一行，或者改为控制台输出。
-                    // 为了不打扰浏览体验，这里改为控制台消息（更温和）
-                    console.log('✨ 你点击了左下按钮：qjq');
+            if (leftLink) {
+                leftLink.addEventListener('click', function(e) {
+                    console.log('🌐 即将跳转: qjq 链接 → https://qinjunhao.github.io/qjq');
                 });
             }
             
-            if (btnRight) {
-                btnRight.addEventListener('click', function(e) {
-                    console.log('✨ 你点击了右下按钮：qjh');
+            if (rightLink) {
+                rightLink.addEventListener('click', function(e) {
+                    console.log('🌐 即将跳转: qjh 链接 → https://qinjunhao.github.io/qjh');
                 });
             }
 
-            // 可选：页面加载完成后再背景微调，无实际影响
-            console.log('🌄 渐变背景页面已加载 — 你好！');
+            console.log('✅ 页面已加载 — 点击左下/右下按钮即可访问对应网址');
         })();
     </script>
 </body>
