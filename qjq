@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>暂无 · 渐变页面</title>
+    <title>暂无 · 渐变 · 按钮链接</title>
     <style>
-        /* 重置默认边距，确保全屏覆盖 */
+        /* 重置 & 基础 */
         * {
             margin: 0;
             padding: 0;
@@ -13,96 +13,186 @@
         }
 
         body {
-            /* 渐变背景：从淡紫到深海蓝，温和而现代 */
-            background: linear-gradient(145deg, #8b9da9 0%, #2d4b6e 70%, #1a2f42 100%);
-            /* 备选渐变（兼容旧浏览器） */
-            background: linear-gradient(135deg, #6b7f8f, #2e4a6a, #1c3144);
+            /* 渐变背景：柔和蓝紫渐变 */
+            background: linear-gradient(145deg, #415f7b 0%, #2b4f6e 40%, #5d3f6e 100%);
+            background: linear-gradient(135deg, #3a6186, #4b5587, #6a4e7c); /* 备选 */
             
-            min-height: 100vh;            /* 至少填满视口高度 */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;      /* 垂直居中 */
-            align-items: center;          /* 水平居中 */
+            justify-content: center;
+            align-items: center;
+            position: relative;
             
             font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            
-            /* 添加一点内阴影增加层次感（可选） */
-            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
         }
 
-        /* 主标题 “暂无...” 样式 */
+        /* 主标题 “暂无...” */
         h1 {
-            color: rgba(255, 255, 255, 0.92);
-            font-size: clamp(3.5rem, 18vw, 9rem);  /* 响应式，最小3.5rem，最大9rem */
+            color: rgba(255, 255, 255, 0.95);
+            font-size: clamp(4rem, 18vw, 10rem);
             font-weight: 700;
-            letter-spacing: 8px;                   /* 略微宽松 */
-            text-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 4px 4px 0 rgba(0, 0, 0, 0.2);
+            letter-spacing: 8px;
+            text-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 3px 3px 0 rgba(0, 0, 0, 0.2);
             margin: 0 1.5rem;
             text-align: center;
             line-height: 1.2;
-            animation: appear 1.2s ease-out;       /* 淡入+上浮动画 */
-            
-            /* 增加三个点的视觉连续性 */
-            word-break: keep-all;
+            animation: fadeUp 1.2s ease-out;
         }
 
-        /* 柔和的入场动画 */
-        @keyframes appear {
+        @keyframes fadeUp {
             0% { opacity: 0; transform: translateY(40px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* 小屏适配：稍微缩小字号，调整间距 */
+        /* 按钮通用样式 — 精致毛玻璃 */
+        .btn {
+            position: absolute;
+            border: none;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 12px 34px;
+            border-radius: 60px;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1d2c3a;
+            cursor: pointer;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(255, 255, 255, 0.2) inset;
+            transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.2s;
+            min-width: 130px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .btn-left {
+            left: 30px;
+            bottom: 30px;
+        }
+
+        .btn-right {
+            right: 30px;
+            bottom: 30px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.06);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(255, 255, 255, 0.5) inset;
+            color: #0b1a26;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 255, 255, 0.3) inset;
+            transition: transform 0.1s;
+        }
+
+        .btn:focus-visible {
+            outline: 4px solid #ffd966;
+            outline-offset: 4px;
+        }
+
+        /* 移动端优化 */
         @media (max-width: 640px) {
             h1 {
-                font-size: clamp(3rem, 12vw, 5rem);
+                font-size: clamp(3.2rem, 13vw, 5.5rem);
                 letter-spacing: 4px;
-                text-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+            }
+            .btn {
+                padding: 10px 24px;
+                font-size: 1.6rem;
+                min-width: 100px;
+            }
+            .btn-left {
+                left: 20px;
+                bottom: 20px;
+            }
+            .btn-right {
+                right: 20px;
+                bottom: 20px;
             }
         }
 
-        /* 极窄屏（如老手机）进一步优化 */
         @media (max-width: 420px) {
+            .btn {
+                padding: 8px 18px;
+                font-size: 1.4rem;
+                min-width: 80px;
+            }
             h1 {
                 font-size: 2.8rem;
-                letter-spacing: 2px;
-                margin: 0 1rem;
             }
         }
 
-        /* 如果用户开启“减少动画”，则取消位移效果，保留淡入即可 */
         @media (prefers-reduced-motion: reduce) {
             h1 {
-                animation: fadeOnly 1s ease-out;
+                animation: none;
             }
-            @keyframes fadeOnly {
-                0% { opacity: 0; }
-                100% { opacity: 1; }
+            .btn {
+                transition: none;
             }
         }
 
-        /* 可选：在页面底部加一行极细的副文本（纯装饰，不影响主体） */
-        .subtle {
+        /* 微装饰 */
+        .note {
             position: fixed;
-            bottom: 16px;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            user-select: none;
-            pointer-events: none;   /* 不干扰任何点击 */
+            bottom: 10px;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.8rem;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <!-- 主标题：暂无... 居中显示 -->
+    <!-- 标题 “暂无...” -->
     <h1>暂无...</h1>
 
-    <!-- 极简装饰 (可完全忽略，仅为增加一点设计感) -->
-    <div class="subtle">· 占位中 ·</div>
+    <!-- 左下按钮：qjq (在新标签页打开，避免下载) -->
+    <a class="btn btn-left" href="https://qinjunhao.github.io/qjq" target="_blank" rel="noopener noreferrer">qjq</a>
 
-    <!-- 无需脚本，干净简洁 -->
+    <!-- 右下按钮：qjh -->
+    <a class="btn btn-right" href="https://qinjunhao.github.io/qjh" target="_blank" rel="noopener noreferrer">qjh</a>
+
+    <!-- 极简底部装饰 -->
+    <div class="note">· 占位页 · 按钮新标签打开</div>
+
+    <script>
+        (function() {
+            // 确保点击时不会意外下载 (添加一层显式打开逻辑，以防默认行为异常)
+            const leftBtn = document.querySelector('.btn-left');
+            const rightBtn = document.querySelector('.btn-right');
+
+            function safeOpen(url, event) {
+                // 如果链接导致下载，尝试用 window.open 强制打开
+                // 但通常 target="_blank" 已足够；这里作为补充，记录并确保新窗口打开
+                console.log('🔗 尝试打开: ' + url);
+                // 实际上让浏览器处理默认行为 (target _blank) 即可，
+                // 我们仅添加日志，并防止任何意外 (比如中间键)
+                // 但不要阻止默认，否则点击无效
+            }
+
+            if (leftBtn) {
+                leftBtn.addEventListener('click', (e) => {
+                    safeOpen('https://qinjunhao.github.io/qjq', e);
+                });
+            }
+
+            if (rightBtn) {
+                rightBtn.addEventListener('click', (e) => {
+                    safeOpen('https://qinjunhao.github.io/qjh', e);
+                });
+            }
+
+            console.log('✅ 页面加载完成 — 按钮将尝试在新标签页打开链接');
+        })();
+    </script>
 </body>
 </html>
