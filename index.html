@@ -12,14 +12,14 @@
         }
 
         body {
-            /* 渐变背景：柔和蓝紫渐变，与之前风格一致 */
+            /* 渐变背景：柔和蓝紫渐变 */
             background: linear-gradient(145deg, #3a6186 0%, #4b5587 40%, #6a4e7c 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
+            position: relative; /* 为绝对定位按钮提供参考 */
             font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
@@ -59,7 +59,7 @@
             transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.2s;
             min-width: 130px;
             text-align: center;
-            text-decoration: none;
+            text-decoration: none; /* 去除下划线 */
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -82,8 +82,8 @@
         .btn-pcl {
             left: 50%;
             bottom: 30px;
-            transform: translateX(-50%);  /* 水平居中 */
-            background: rgba(255, 245, 210, 0.95); /* 浅暖色，略微区分 */
+            transform: translateX(-50%); /* 水平居中 */
+            background: rgba(255, 245, 210, 0.95); /* 浅暖色稍作区分 */
             color: #2c3e4e;
             border: 1px solid rgba(255, 255, 200, 0.8);
         }
@@ -135,7 +135,7 @@
                 bottom: 20px;
             }
             .btn-pcl {
-                bottom: 20px;  /* 与左右按钮对齐 */
+                bottom: 20px;
                 padding: 10px 24px;
                 font-size: 1.6rem;
                 min-width: 100px;
@@ -153,6 +153,7 @@
             }
         }
 
+        /* 尊重减少动画偏好 */
         @media (prefers-reduced-motion: reduce) {
             h1, .btn {
                 animation: none;
@@ -160,7 +161,7 @@
             }
         }
 
-        /* 底部提示小字（可选） */
+        /* 底部装饰提示（可选） */
         .hint {
             position: fixed;
             bottom: 8px;
@@ -174,47 +175,20 @@
 <body>
     <h1>你好！</h1>
 
-    <!-- 左下 qjq 按钮 - 新标签页打开 -->
+    <!-- 左下 qjq 按钮 - 新标签页打开 GitHub 链接 -->
     <a class="btn btn-left" href="https://qinjunhao.github.io/qjq" target="_blank" rel="noopener noreferrer">qjq</a>
 
     <!-- 右下 qjh 按钮 -->
     <a class="btn btn-right" href="https://qinjunhao.github.io/qjh" target="_blank" rel="noopener noreferrer">qjh</a>
 
-    <!-- 中间下方 PCL 按钮 - 使用自定义点击事件，同时打开两个链接 -->
-    <button class="btn btn-pcl" id="pclButton">PCL</button>
+    <!-- 中间下方 PCL 按钮 - 直接链接到指定 GitHub 页面 -->
+    <a class="btn btn-pcl" href="https://qinjunhao.github.io/PCL" target="_blank" rel="noopener noreferrer">PCL</a>
 
-    <!-- 极简辅助脚本 -->
+    <!-- 极简辅助脚本（仅控制台日志，不影响功能） -->
     <script>
         (function() {
-            const pclBtn = document.getElementById('pclButton');
-            
-            // 定义两个需要打开的 PCL 相关链接
-            const pclLinks = [
-                "https://zip1.webgetstore.com/2026/03/08/7e1fe9b5249794e262ea7160586c7ec8.zip?sg=b4af6028b60a139bad70d43d4dd0c0dc&e=69b2c7e0&fileName=PCL%20%E6%AD%A3%E5%BC%8F%E7%89%88%202.12.3.zip&fi=277423359"
-                "https://exe1.webgetstore.com/2024/10/30/354909475b1cd89f73c4a1327e62dbb5.exe?sg=181fe322032c6e8f3228143672402e3b&e=69b2c80e&fileName=[%E5%A6%82%E6%9E%9C%E6%89%93%E4%B8%8D%E5%BC%80%20PCL%20%E8%AF%B7%E5%AE%89%E8%A3%85%E8%BF%99%E4%B8%AA%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83]%20.NET%20Framework%204.6.2.exe&fi=206249210",
-            ];
-
-            if (pclBtn) {
-                pclBtn.addEventListener('click', () => {
-                    // 依次打开两个链接。浏览器通常会阻止多个弹窗，因此采用略微延迟的方式。
-                    // 先打开第一个（.exe 安装环境），稍后再打开第二个（.zip 压缩包）
-                    console.log('🖱️ 点击 PCL 按钮，准备打开两个链接...');
-                    
-                    // 打开第一个链接（.exe）
-                    window.open(pclLinks[0], '_blank');
-                    
-                    // 延迟 300ms 打开第二个链接（.zip），提高被浏览器接受的概率
-                    setTimeout(() => {
-                        window.open(pclLinks[1], '_blank');
-                    }, 300);
-                    
-                    // 同时给出提示（可选）
-                    alert('即将尝试打开两个链接：\n1. .NET Framework 环境 (exe)\n2. PCL 正式版压缩包 (zip)\n如果浏览器拦截，请允许弹出窗口。');
-                });
-            }
-
-            // 为左右按钮添加控制台日志（方便调试，不影响功能）
-            document.querySelectorAll('.btn-left, .btn-right').forEach(btn => {
+            // 为三个按钮添加点击日志，方便调试
+            document.querySelectorAll('.btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     console.log(`🔗 点击: ${btn.innerText} -> ${btn.href}`);
                 });
@@ -223,6 +197,6 @@
     </script>
 
     <!-- 极简装饰文字 -->
-    <div class="hint">· 左下 · 右下 · 中间下方 PCL ·</div>
+    <div class="hint">· 左下 · 右下 · 中间 PCL ·</div>
 </body>
 </html>
