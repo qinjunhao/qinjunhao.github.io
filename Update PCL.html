@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下载PCL · 渐变引导页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* 渐变背景：科技感蓝紫渐变 */
+            background: linear-gradient(145deg, #0f2027 0%, #203a43 40%, #2c5364 100%);
+            /* 备选更丰富的渐变 */
+            background: linear-gradient(135deg, #1a2f3f, #2b4b6f, #5e3e7c);
+            
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative; /* 为绝对定位按钮提供参考 */
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* 主标题 “下载PCL” */
+        h1 {
+            color: rgba(255, 255, 255, 0.96);
+            font-size: clamp(3.2rem, 15vw, 8rem);
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 4px 4px 0 rgba(0, 0, 0, 0.3);
+            margin: 0 1.5rem 1.5rem 1.5rem;
+            text-align: center;
+            line-height: 1.2;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 按钮通用样式 — 磨砂玻璃效果，适配长文本 */
+        .btn {
+            position: absolute;
+            border: none;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            padding: 14px 28px;
+            border-radius: 50px; /* 圆角但保留一定空间给长文 */
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0a1a2a;
+            cursor: pointer;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(255, 255, 255, 0.2) inset;
+            transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.2s;
+            max-width: 90vw;          /* 避免按钮超出屏幕 */
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            line-height: 1.4;
+            word-break: break-word;   /* 允许长单词换行 */
+            white-space: normal;       /* 文字自动换行 */
+            min-width: 180px;          /* 保证基础宽度 */
+        }
+
+        /* 左下按钮 — PCL.zip (短文本) */
+        .btn-left {
+            left: 30px;
+            bottom: 30px;
+            background: rgba(230, 245, 255, 0.95); /* 淡蓝调 */
+            color: #003055;
+        }
+
+        /* 右下按钮 — 长文本按钮 */
+        .btn-right {
+            right: 30px;
+            bottom: 30px;
+            background: rgba(255, 240, 220, 0.95); /* 暖色提醒 */
+            color: #3a2c1b;
+            font-size: 1.4rem;         /* 稍小一点以适应长文 */
+            padding: 14px 25px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.04);
+            box-shadow: 0 22px 40px rgba(0, 0, 0, 0.6), 0 2px 12px rgba(255, 255, 255, 0.6) inset;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(255, 255, 255, 0.3) inset;
+            transition: transform 0.1s;
+        }
+
+        .btn:focus-visible {
+            outline: 4px solid #ffb347;
+            outline-offset: 4px;
+        }
+
+        /* 小屏幕适配：按钮位置微调、文字缩小、可能纵向排列 */
+        @media (max-width: 800px) {
+            h1 {
+                margin-bottom: 40px;
+                font-size: clamp(2.8rem, 10vw, 5rem);
+            }
+            .btn {
+                font-size: 1.2rem;
+                padding: 12px 20px;
+                min-width: 140px;
+            }
+            .btn-right {
+                font-size: 1.1rem;
+                right: 20px;
+                bottom: 20px;
+                max-width: 280px;       /* 限制宽屏下过长 */
+            }
+            .btn-left {
+                left: 20px;
+                bottom: 20px;
+            }
+        }
+
+        /* 超窄屏幕 (如手机竖屏) 可能让按钮并排太挤，这里改为上下堆叠并居中 */
+        @media (max-width: 550px) {
+            body {
+                justify-content: flex-start; /* 内容稍向上 */
+                padding-top: 15vh;
+            }
+            h1 {
+                font-size: 2.8rem;
+                margin-bottom: 30px;
+            }
+            .btn {
+                position: static;       /* 取消绝对定位 */
+                display: block;
+                width: fit-content;
+                max-width: 90vw;
+                margin: 15px auto;
+                font-size: 1.2rem;
+                transform: none;
+            }
+            .btn-left, .btn-right {
+                left: auto;
+                right: auto;
+                bottom: auto;
+            }
+            .btn-left {
+                margin-top: 20px;
+            }
+            .btn-right {
+                margin-bottom: 20px;
+                font-size: 1.1rem;
+            }
+            /* 取消绝对定位后，利用flex让按钮在底部自然排列 */
+            body {
+                justify-content: space-between;
+                padding: 10vh 0 5vh 0;
+            }
+            h1 {
+                flex-shrink: 0;
+            }
+            /* 用一个空div占位或简单处理，使按钮区域自然 */
+            .btn-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+        }
+
+        /* 确保长文本在极端小屏下也完整显示 */
+        @media (max-width: 380px) {
+            .btn-right {
+                font-size: 1rem;
+                padding: 10px 16px;
+                white-space: normal;
+            }
+            .btn-left {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* 减少动画偏好 */
+        @media (prefers-reduced-motion: reduce) {
+            h1, .btn {
+                animation: none;
+                transition: none;
+            }
+        }
+
+        /* 底部小点缀 (不影响点击) */
+        .footnote {
+            position: fixed;
+            bottom: 8px;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.7rem;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>下载PCL</h1>
+
+    <!-- 左下按钮：PCL.zip (短文本，指向压缩包) -->
+    <a class="btn btn-left" 
+       href="https://zip1.webgetstore.com/2026/03/08/7e1fe9b5249794e262ea7160586c7ec8.zip?sg=b4af6028b60a139bad70d43d4dd0c0dc&e=69b2c7e0&fileName=PCL%20%E6%AD%A3%E5%BC%8F%E7%89%88%202.12.3.zip&fi=277423359" 
+       target="_blank" 
+       rel="noopener noreferrer">
+       PCL.zip
+    </a>
+
+    <!-- 右下按钮：长文本，指向 .NET Framework 环境安装包 -->
+    <a class="btn btn-right" 
+       href="https://exe1.webgetstore.com/2024/10/30/354909475b1cd89f73c4a1327e62dbb5.exe?sg=181fe322032c6e8f3228143672402e3b&e=69b2c80e&fileName=[%E5%A6%82%E6%9E%9C%E6%89%93%E4%B8%8D%E5%BC%80%20PCL%20%E8%AF%B7%E5%AE%89%E8%A3%85%E8%BF%99%E4%B8%AA%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83]%20.NET%20Framework%204.6.2.exe&fi=206249210" 
+       target="_blank" 
+       rel="noopener noreferrer">
+       如果打不开 PCL 请下载并运行
+    </a>
+
+    <!-- 极简点击日志 (不影响下载) -->
+    <script>
+        (function() {
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    console.log(`📥 开始下载: ${btn.innerText} -> ${btn.href}`);
+                });
+            });
+        })();
+    </script>
+
+    <!-- 装饰性文字 -->
+    <div class="footnote">· 点击按钮即开始下载 ·</div>
+</body>
+</html>
