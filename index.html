@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>渐变背景 · 你好！ · 链接按钮</title>
+    <title>你好 · 三按钮 · 渐变页面</title>
     <style>
-        /* 全局重置 & 基础样式 */
         * {
             margin: 0;
             padding: 0;
@@ -13,110 +12,114 @@
         }
 
         body {
-            /* 渐变背景：从深海蓝到紫罗兰 */
-            background: linear-gradient(145deg, #0b1f3a 0%, #2b4b7c 40%, #5e3c82 100%);
-            /* 优雅的回退背景色 */
-            background: linear-gradient(135deg, #1e3c72, #2a5298, #6a4e9b);
-            
+            /* 渐变背景：柔和蓝紫渐变，与之前风格一致 */
+            background: linear-gradient(145deg, #3a6186 0%, #4b5587 40%, #6a4e7c 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;          /* 作为绝对定位的参考容器 */
-            
+            position: relative;
             font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* 主标题 — 你好！ */
+        /* 主标题 你好！ */
         h1 {
             color: rgba(255, 255, 255, 0.95);
-            font-size: clamp(3.5rem, 15vw, 7rem);
-            font-weight: 800;
-            letter-spacing: 4px;
-            text-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 2px 2px 0 rgba(0, 0, 0, 0.2);
-            margin: 0 1rem;
+            font-size: clamp(4rem, 18vw, 10rem);
+            font-weight: 700;
+            letter-spacing: 8px;
+            text-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 3px 3px 0 rgba(0, 0, 0, 0.2);
+            margin: 0 1.5rem;
             text-align: center;
             line-height: 1.2;
-            animation: fadeIn 1s ease-out;
+            animation: fadeUp 1.2s ease-out;
         }
 
-        /* 柔和入场动画 */
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(40px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* 按钮共用样式 — 干净、现代、微光 (同时应用于 <a> 标签) */
+        /* 按钮通用样式 — 精致毛玻璃 */
         .btn {
-            position: absolute;          /* 相对于 body 定位 */
+            position: absolute;
             border: none;
             background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             padding: 12px 34px;
             border-radius: 60px;
             font-size: 2rem;
             font-weight: 600;
-            color: #0b1f3a;
+            color: #1d2c3a;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 2px 5px rgba(255, 255, 255, 0.2) inset;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(255, 255, 255, 0.2) inset;
             transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.2s;
-            will-change: transform;
-            line-height: 1.2;
             min-width: 130px;
             text-align: center;
-            letter-spacing: 1px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-
-            /* 确保 <a> 标签没有下划线，且继承颜色 */
             text-decoration: none;
-            display: inline-flex;        /* 使内部文字完美居中 */
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+            line-height: 1.2;
         }
 
-        /* 左下按钮 */
         .btn-left {
             left: 30px;
             bottom: 30px;
         }
 
-        /* 右下按钮 */
         .btn-right {
             right: 30px;
             bottom: 30px;
         }
 
-        /* 悬停时：上浮、更亮、轻微放大 */
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.98);
-            transform: scale(1.06);
-            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(255, 255, 255, 0.4) inset;
-            color: #0a1a2f;
+        /* 中间下方的 PCL 按钮 */
+        .btn-pcl {
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);  /* 水平居中 */
+            background: rgba(255, 245, 210, 0.95); /* 浅暖色，略微区分 */
+            color: #2c3e4e;
+            border: 1px solid rgba(255, 255, 200, 0.8);
         }
 
-        /* 点击时：缩小、加深内阴影 */
+        .btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.06);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(255, 255, 255, 0.5) inset;
+            color: #0b1a26;
+        }
+
+        .btn-pcl:hover {
+            background: #fff9e6;
+            transform: translateX(-50%) scale(1.06); /* 保持居中同时放大 */
+        }
+
         .btn:active {
             transform: scale(0.96);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.2) inset;
-            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 255, 255, 0.3) inset;
             transition: transform 0.1s;
         }
 
-        /* 聚焦状态（键盘导航）保留轮廓 */
+        .btn-pcl:active {
+            transform: translateX(-50%) scale(0.96);
+        }
+
         .btn:focus-visible {
             outline: 4px solid #ffd966;
             outline-offset: 4px;
         }
 
-        /* 手机等小屏幕适配 */
+        /* 移动端优化 */
         @media (max-width: 640px) {
             h1 {
-                font-size: clamp(2.8rem, 12vw, 5rem);
-                margin-top: -5vh;
+                font-size: clamp(3.2rem, 13vw, 5.5rem);
+                letter-spacing: 4px;
             }
             .btn {
                 padding: 10px 24px;
@@ -131,6 +134,12 @@
                 right: 20px;
                 bottom: 20px;
             }
+            .btn-pcl {
+                bottom: 20px;  /* 与左右按钮对齐 */
+                padding: 10px 24px;
+                font-size: 1.6rem;
+                min-width: 100px;
+            }
         }
 
         @media (max-width: 420px) {
@@ -140,69 +149,80 @@
                 min-width: 80px;
             }
             h1 {
-                font-size: 2.5rem;
-            }
-        }
-
-        /* 防止文字被选中时出现奇怪背景 */
-        .btn::selection {
-            background: transparent;
-        }
-
-        /* 如果屏幕高度过矮，调整 */
-        @media (max-height: 500px) {
-            h1 {
                 font-size: 2.8rem;
-                margin-top: 10px;
-            }
-            .btn {
-                padding: 6px 18px;
-                font-size: 1.3rem;
             }
         }
 
-        /* 尊重用户减少动画偏好 */
         @media (prefers-reduced-motion: reduce) {
-            h1 {
+            h1, .btn {
                 animation: none;
-            }
-            .btn {
                 transition: none;
             }
+        }
+
+        /* 底部提示小字（可选） */
+        .hint {
+            position: fixed;
+            bottom: 8px;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.75rem;
+            pointer-events: none;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
-    <!-- 主标题 “你好！” 居中显示 -->
     <h1>你好！</h1>
 
-    <!-- 左下角链接按钮，跳转到 https://qinjunhao.github.io/qjq -->
-    <a class="btn btn-left" href="https://qinjunhao.github.io/qjq">qjq</a>
+    <!-- 左下 qjq 按钮 - 新标签页打开 -->
+    <a class="btn btn-left" href="https://qinjunhao.github.io/qjq" target="_blank" rel="noopener noreferrer">qjq</a>
 
-    <!-- 右下角链接按钮，跳转到 https://qinjunhao.github.io/qjh -->
-    <a class="btn btn-right" href="https://qinjunhao.github.io/qjh">qjh</a>
+    <!-- 右下 qjh 按钮 -->
+    <a class="btn btn-right" href="https://qinjunhao.github.io/qjh" target="_blank" rel="noopener noreferrer">qjh</a>
 
-    <!-- 极简脚本：控制台友好提示，同时不影响链接跳转 -->
+    <!-- 中间下方 PCL 按钮 - 使用自定义点击事件，同时打开两个链接 -->
+    <button class="btn btn-pcl" id="pclButton">PCL</button>
+
+    <!-- 极简辅助脚本 -->
     <script>
         (function() {
-            // 仅仅在点击时在控制台留下记录，不会阻止默认行为
-            const leftLink = document.querySelector('.btn-left');
-            const rightLink = document.querySelector('.btn-right');
+            const pclBtn = document.getElementById('pclButton');
             
-            if (leftLink) {
-                leftLink.addEventListener('click', function(e) {
-                    console.log('🌐 即将跳转: qjq 链接 → https://qinjunhao.github.io/qjq');
-                });
-            }
-            
-            if (rightLink) {
-                rightLink.addEventListener('click', function(e) {
-                    console.log('🌐 即将跳转: qjh 链接 → https://qinjunhao.github.io/qjh');
+            // 定义两个需要打开的 PCL 相关链接
+            const pclLinks = [
+                "https://exe1.webgetstore.com/2024/10/30/354909475b1cd89f73c4a1327e62dbb5.exe?sg=181fe322032c6e8f3228143672402e3b&e=69b2c80e&fileName=[%E5%A6%82%E6%9E%9C%E6%89%93%E4%B8%8D%E5%BC%80%20PCL%20%E8%AF%B7%E5%AE%89%E8%A3%85%E8%BF%99%E4%B8%AA%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83]%20.NET%20Framework%204.6.2.exe&fi=206249210",
+                "https://zip1.webgetstore.com/2026/03/08/7e1fe9b5249794e262ea7160586c7ec8.zip?sg=b4af6028b60a139bad70d43d4dd0c0dc&e=69b2c7e0&fileName=PCL%20%E6%AD%A3%E5%BC%8F%E7%89%88%202.12.3.zip&fi=277423359"
+            ];
+
+            if (pclBtn) {
+                pclBtn.addEventListener('click', () => {
+                    // 依次打开两个链接。浏览器通常会阻止多个弹窗，因此采用略微延迟的方式。
+                    // 先打开第一个（.exe 安装环境），稍后再打开第二个（.zip 压缩包）
+                    console.log('🖱️ 点击 PCL 按钮，准备打开两个链接...');
+                    
+                    // 打开第一个链接（.exe）
+                    window.open(pclLinks[0], '_blank');
+                    
+                    // 延迟 300ms 打开第二个链接（.zip），提高被浏览器接受的概率
+                    setTimeout(() => {
+                        window.open(pclLinks[1], '_blank');
+                    }, 300);
+                    
+                    // 同时给出提示（可选）
+                    alert('即将尝试打开两个链接：\n1. .NET Framework 环境 (exe)\n2. PCL 正式版压缩包 (zip)\n如果浏览器拦截，请允许弹出窗口。');
                 });
             }
 
-            console.log('✅ 页面已加载 — 点击左下/右下按钮即可访问对应网址');
+            // 为左右按钮添加控制台日志（方便调试，不影响功能）
+            document.querySelectorAll('.btn-left, .btn-right').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    console.log(`🔗 点击: ${btn.innerText} -> ${btn.href}`);
+                });
+            });
         })();
     </script>
+
+    <!-- 极简装饰文字 -->
+    <div class="hint">· 左下 · 右下 · 中间下方 PCL ·</div>
 </body>
 </html>
