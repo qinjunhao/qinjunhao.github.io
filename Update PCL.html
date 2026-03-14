@@ -92,16 +92,37 @@
             padding: 14px 25px;
         }
 
+        /* 新增中间下方按钮 — 水平居中，比左右按钮稍高一点 */
+        .btn-center {
+            left: 50%;
+            bottom: 120px;              /* 在左右按钮之上 (左右按钮 bottom:30px) */
+            transform: translateX(-50%);
+            background: rgba(220, 240, 255, 0.95); /* 柔和蓝，区别于左右 */
+            color: #024d6e;
+            font-size: 1.4rem;
+            padding: 14px 28px;
+            border: 1px solid rgba(255, 255, 200, 0.6);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(255, 255, 180, 0.4) inset;
+        }
+
         .btn:hover {
             background: rgba(255, 255, 255, 1);
             transform: scale(1.04);
             box-shadow: 0 22px 40px rgba(0, 0, 0, 0.6), 0 2px 12px rgba(255, 255, 255, 0.6) inset;
         }
 
+        .btn-center:hover {
+            transform: translateX(-50%) scale(1.04); /* 保持居中同时放大 */
+        }
+
         .btn:active {
             transform: scale(0.97);
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(255, 255, 255, 0.3) inset;
             transition: transform 0.1s;
+        }
+
+        .btn-center:active {
+            transform: translateX(-50%) scale(0.97);
         }
 
         .btn:focus-visible {
@@ -124,18 +145,23 @@
                 font-size: 1.1rem;
                 right: 20px;
                 bottom: 20px;
-                max-width: 280px;       /* 限制宽屏下过长 */
+                max-width: 280px;
             }
             .btn-left {
                 left: 20px;
                 bottom: 20px;
             }
+            .btn-center {
+                bottom: 100px;          /* 在较小屏幕上稍微降低一点，避免太靠上 */
+                font-size: 1.2rem;
+                padding: 12px 24px;
+            }
         }
 
-        /* 超窄屏幕 (如手机竖屏) 可能让按钮并排太挤，这里改为上下堆叠并居中 */
+        /* 超窄屏幕 (如手机竖屏) 按钮改为垂直堆叠 */
         @media (max-width: 550px) {
             body {
-                justify-content: flex-start; /* 内容稍向上 */
+                justify-content: flex-start;
                 padding-top: 15vh;
             }
             h1 {
@@ -151,7 +177,7 @@
                 font-size: 1.2rem;
                 transform: none;
             }
-            .btn-left, .btn-right {
+            .btn-left, .btn-right, .btn-center {
                 left: auto;
                 right: auto;
                 bottom: auto;
@@ -159,11 +185,14 @@
             .btn-left {
                 margin-top: 20px;
             }
+            .btn-center {
+                margin: 15px auto;
+                font-size: 1.2rem;
+            }
             .btn-right {
                 margin-bottom: 20px;
                 font-size: 1.1rem;
             }
-            /* 取消绝对定位后，利用flex让按钮在底部自然排列 */
             body {
                 justify-content: space-between;
                 padding: 10vh 0 5vh 0;
@@ -171,18 +200,11 @@
             h1 {
                 flex-shrink: 0;
             }
-            /* 用一个空div占位或简单处理，使按钮区域自然 */
-            .btn-wrapper {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-            }
         }
 
         /* 确保长文本在极端小屏下也完整显示 */
         @media (max-width: 380px) {
-            .btn-right {
+            .btn-right, .btn-center {
                 font-size: 1rem;
                 padding: 10px 16px;
                 white-space: normal;
@@ -213,7 +235,7 @@
 <body>
     <h1>下载PCL</h1>
 
-    <!-- 左下按钮：PCL.zip (短文本，指向压缩包) -->
+    <!-- 左下按钮：PCL.zip -->
     <a class="btn btn-left" 
        href="https://ltcat.lanzouv.com/iNvQV3k547ej" 
        target="_blank" 
@@ -221,7 +243,15 @@
        PCL.zip
     </a>
 
-    <!-- 右下按钮：长文本，指向 .NET Framework 环境安装包 -->
+    <!-- 新增中间下方按钮：备用蓝奏云文件夹 -->
+    <a class="btn btn-center" 
+       href="https://ltcat.lanzouv.com/b0aj6gsid" 
+       target="_blank" 
+       rel="noopener noreferrer">
+       如果都不行打开这个（密码 pcl2）
+    </a>
+
+    <!-- 右下按钮：.NET Framework 环境安装包 (密码 qjh) -->
     <a class="btn btn-right" 
        href="https://ltcat.lanzouv.com/i1mhD2drlvpa" 
        target="_blank" 
@@ -229,7 +259,7 @@
        如果打不开 PCL 请下载并运行(密码 qjh)
     </a>
 
-    <!-- 极简点击日志 (不影响下载) -->
+    <!-- 点击日志 (不影响下载) -->
     <script>
         (function() {
             document.querySelectorAll('.btn').forEach(btn => {
